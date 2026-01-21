@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Para vos 💙">
+
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.png">
+
+<title>Para vos 💙</title>
+
+<style>
+:root{
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --green:#4CAF50;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color: transparent;
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  height:100%;
+  background:#f2f4f7;
+  overscroll-behavior:none;
+}
+
+.app{
+  min-height:100svh;
+  padding:
+    calc(16px + var(--safe-top))
+    16px
+    calc(20px + var(--safe-bottom));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.screen{
+  width:100%;
+  max-width:360px;
+  background:#fff;
+  border-radius:28px;
+  box-shadow:0 20px 45px rgba(0,0,0,.18);
+  padding:26px 22px 30px;
+  text-align:center;
+  animation:fadeIn .5s ease;
+}
+
+.hidden{display:none;}
+
+h2{
+  margin:0 0 12px;
+  font-size:22px;
+  color:#2e7d32;
+}
+
+p{
+  font-size:15.5px;
+  color:#555;
+  line-height:1.6;
+  margin:12px 0;
+}
+
+.highlight{
+  font-weight:600;
+  color:var(--green);
+}
+
+.primary-btn{
+  width:100%;
+  margin-top:20px;
+  padding:15px 0;
+  border:none;
+  border-radius:32px;
+  background:var(--green);
+  color:#fff;
+  font-size:16px;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  margin-top:10px;
+}
+
+.buttons button{
+  flex:1;
+  padding:15px 0;
+  font-size:16px;
+  border:none;
+  border-radius:32px;
+}
+
+.yes{background:var(--green);color:#fff;}
+.no{background:#e0e0e0;color:#333;}
+
+button:active{transform:scale(.96);}
+
+.surprise{
+  display:none;
+  margin-top:22px;
+  animation:pop .7s ease forwards;
+}
+
+.surprise img{
+  width:100%;
+  border-radius:22px;
+  box-shadow:0 14px 30px rgba(0,0,0,.22);
+}
+
+.surprise h3{
+  margin:16px 0 6px;
+  font-size:20px;
+  color:#2e7d32;
+}
+
+.heart{
+  position:fixed;
+  bottom:calc(-20px + var(--safe-bottom));
+  font-size:20px;
+  animation:floatUp 3s linear forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes pop{
+  from{opacity:0;transform:scale(.9);}
+  to{opacity:1;transform:scale(1);}
+}
+
+@keyframes floatUp{
+  to{transform:translateY(-100svh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- INTRO -->
+  <div class="screen" id="intro">
+    <h2>Hola 💙</h2>
+    <p>
+      Esto es algo muy especial.<br>
+      No hace falta apurarse.
+    </p>
+    <p>
+      Cuando estés listo,<br>
+      tocá para continuar.
+    </p>
+    <button class="primary-btn" onclick="entrar()">Entrar</button>
+  </div>
+
+  <!-- MAIN -->
+  <div class="screen hidden" id="main">
+
+    <h2>Hola tío 💙</h2>
+
+    <p>
+      Soy yo…<br>
+      todavía no puedo hablar ni caminar,<br>
+      pero desde acá adentro ya siento todo.
+    </p>
+
+    <p>
+      Siento el amor,<br>
+      siento las voces,<br>
+      y sé que hay personas especiales<br>
+      que me van a cuidar toda la vida.
+    </p>
+
+    <p>
+      <span class="highlight">Muy muy pronto</span><br>
+      voy a llegar a este mundo<br>
+      con sueños por cumplir<br>
+      y un corazón enorme para amar.
+    </p>
+
+    <p>
+      Por eso hoy quiero preguntarte algo<br>
+      que sale directo desde mi corazón…
+    </p>
+
+    <p class="highlight" style="font-size:20px;margin:18px 0;">
+      ¿Querés ser mi padrino?
+    </p>
+
+    <div class="buttons">
+      <button class="yes" onclick="acepta()">Sí 💙</button>
+      <button class="no" onclick="nope()">No 🙈</button>
+    </div>
+
+    <div class="surprise" id="sorpresa">
+      <h3>¡Gracias, padrino! 💙</h3>
+      <img src="WhatsApp Image 2026-01-20 at 14.27.04.jpeg" alt="Bebé">
+      <p>Tu futuro ahijado ya te quiere muchísimo 👣</p>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function entrar(){
+  intro.classList.add("hidden");
+  main.classList.remove("hidden");
+}
+
+function acepta(){
+  sorpresa.style.display="block";
+  for(let i=0;i<8;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💙";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+  }
+}
+
+function nope(){
+  alert("No acepto un no como respuesta 😌💙");
+}
+</script>
+
+</body>
+</html>
